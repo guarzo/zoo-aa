@@ -1,0 +1,23 @@
+{% extends "allianceauth/base-bs5.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}{% translate "Dashboard" %}{% endblock %}
+{% block header_nav_brand %}
+    {% translate "Dashboard" %}
+{% endblock %}
+{% block content %}
+      <!-- Zoo Landers Hero Banner -->
+      <div class="zoo-hero-banner" style="background-image: url('{% static "zoo-custom/images/hero-banner.jpg" %}');">
+          <div class="zoo-hero-content">
+              <h1>Welcome to Zoo Landers</h1>
+              <p>Center for Kids Who Can't Fly Good</p>
+          </div>
+      </div>
+
+      <div class="row">
+          {% for dash in views %}
+              {{ dash | safe }}
+          {% endfor %}
+      </div>
+{% endblock %}

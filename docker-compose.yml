@@ -15,6 +15,7 @@ x-allianceauth-base: &allianceauth-base
     - ./conf/urls.py:/home/allianceauth/myauth/myauth/urls.py
     - ./conf/memory_check.sh:/memory_check.sh
     - ./templates:/home/allianceauth/myauth/myauth/templates/
+    - ./static:/home/allianceauth/myauth/myauth/static/ 
     - static-volume:/var/www/myauth/static
   depends_on:
     - redis
