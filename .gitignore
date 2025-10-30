@@ -3,3 +3,4 @@ setup.sql
 mysql-data
 mysql-data/
 conf/local.py
+.claude

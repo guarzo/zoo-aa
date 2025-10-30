@@ -115,7 +115,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 # aa payout config
-AAPAYOUT_JANICE_API_KEY = "CyqexHWN7TjhygzFi2A8Sei22qnLBGR4"  # Get this from https://janice.e-351.com
+AAPAYOUT_JANICE_API_KEY = "REDACTED"  # Secret removed
 AAPAYOUT_JANICE_MARKET = 2          # Market hub: jita, amarr, dodixie, rens, hek
 AAPAYOUT_JANICE_PRICE_TYPE = "buy"      # Price type: buy or sell
 
@@ -151,6 +151,11 @@ CELERYBEAT_SCHEDULE['wanderer_cleanup_access_lists'] = {
 # Be sure to set the callback URLto https://example.com/discord/callback/
 # substituting your domain for example.com in Discord's developer portal
 # (Be sure to add the trailing slash)
+DISCORD_GUILD_ID = '576238803824410629'
+DISCORD_CALLBACK_URL = "https://auth.zoolanders.space/discord/callback/"
+DISCORD_APP_ID = '1324878354796646451'
+DISCORD_APP_SECRET = "REDACTED"
+DISCORD_BOT_TOKEN = "REDACTED"
 DISCORD_SYNC_NAMES = True
 
 CELERYBEAT_SCHEDULE['discord.update_all_usernames'] = {
