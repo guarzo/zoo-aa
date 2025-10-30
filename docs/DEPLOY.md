@@ -69,13 +69,26 @@ cat >> ./templates/allianceauth/side-menu.html << 'EOF'
 </li>
 EOF
 
-# Extract dashboard.html (optional - for hero banner)
-docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/templates/allianceauth/dashboard.html > ./templates/allianceauth/dashboard.html
+# Extract dashboard.html (for hero banner)
+# Note: The dashboard is in the authentication app, not allianceauth
+mkdir -p ./templates/authentication/
+docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/authentication/templates/authentication/dashboard.html > ./templates/authentication/dashboard.html
 
-# Edit to add hero banner after {% block content %}
-# (Manual edit recommended for this one)
-nano ./templates/allianceauth/dashboard.html
-# Add the content from templates/allianceauth/dashboard-hero-banner.html
+# Edit dashboard.html to add hero banner
+# Add this after {% block content %} and before <div class="row">:
+nano ./templates/authentication/dashboard.html
+```
+
+**Add this to dashboard.html after `{% block content %}`:**
+
+```html
+    <!-- Zoo Landers Hero Banner -->
+    <div class="zoo-hero-banner" style="background-image: url('/static/zoo-custom/images/hero-banner.jpg');">
+        <div class="zoo-hero-content">
+            <h1>Welcome to Zoo Landers</h1>
+            <p>Center for Kids Who Can't Fly Good</p>
+        </div>
+    </div>
 ```
 
 ### 3. Verify docker-compose.yml
@@ -114,7 +127,7 @@ Wait 30 seconds for services to fully restart.
    - [ ] Dark space sidebar
    - [ ] Custom links in sidebar
    - [ ] Favicon in browser tab
-   - [ ] Hero banner on dashboard (if added)
+   - [ ] Hero banner on dashboard
 
 ---
 
@@ -140,6 +153,14 @@ docker exec allianceauth_gunicorn ls /var/www/myauth/static/allianceauth/icons/
 cat templates/allianceauth/side-menu.html | grep "ZOO LANDERS"
 # Restart gunicorn
 docker-compose restart allianceauth_gunicorn
+```
+
+**Hero banner not showing or error?**
+```bash
+# Verify images were collected
+docker exec allianceauth_gunicorn ls /var/www/myauth/static/zoo-custom/images/
+# Make sure you're using direct path: url('/static/zoo-custom/images/hero-banner.jpg')
+# NOT: url('{% static "..." %}')
 ```
 
 ---
