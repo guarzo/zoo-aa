@@ -1,0 +1,669 @@
+/*
+ * Zoo Landers Alliance Auth Custom Styles
+ * Corporation: Zoo Landers
+ * Theme: Space Exploration Zoo
+ * Tagline: Center for Kids Who Can't Fly Good
+ */
+
+/* ========================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ======================================== */
+
+:root {
+  /* Brand Colors */
+  --zoo-blue: #1e90ff;
+  --zoo-navy: #1a237e;
+  --zoo-gold: #FFD700;
+  --zoo-brown-dark: #4a3728;
+  --zoo-brown-light: #8b7355;
+  --zoo-space-dark: #0a0a1a;
+  --zoo-purple-nebula: #4a1a6e;
+  --zoo-green-nebula: #2d5a3d;
+
+  /* UI State Colors */
+  --zoo-success: #4caf50;
+  --zoo-warning: #ff9800;
+  --zoo-danger: #f44336;
+  --zoo-info: var(--zoo-blue);
+
+  /* Neutrals */
+  --zoo-white: #ffffff;
+  --zoo-gray-light: #f5f5f5;
+  --zoo-gray-medium: #cccccc;
+  --zoo-gray-dark: #333333;
+}
+
+/* ========================================
+   GLOBAL OVERRIDES
+   ======================================== */
+
+body {
+  background-color: var(--zoo-space-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main content wrapper */
+.wrapper {
+  background-color: var(--zoo-gray-light);
+}
+
+/* ========================================
+   NAVIGATION BAR
+   ======================================== */
+
+.navbar,
+.navbar-default {
+  background: linear-gradient(135deg, var(--zoo-navy) 0%, var(--zoo-blue) 100%) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+  padding: 10px 15px !important;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  width: auto;
+}
+
+.navbar .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a {
+  color: var(--zoo-white) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navbar .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:hover {
+  color: var(--zoo-gold) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--zoo-gold) !important;
+}
+
+/* Navbar dropdown menus */
+.navbar .dropdown-menu {
+  background-color: var(--zoo-navy);
+}
+
+.navbar .dropdown-menu > li > a {
+  color: var(--zoo-white) !important;
+}
+
+.navbar .dropdown-menu > li > a:hover {
+  background-color: rgba(30, 144, 255, 0.2) !important;
+  color: var(--zoo-gold) !important;
+}
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+
+.sidebar,
+.main-sidebar {
+  background: linear-gradient(180deg, var(--zoo-navy) 0%, var(--zoo-space-dark) 100%) !important;
+}
+
+.sidebar-menu > li > a,
+.main-sidebar .sidebar-menu > li > a {
+  color: var(--zoo-white) !important;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu > li > a:hover,
+.main-sidebar .sidebar-menu > li > a:hover {
+  background-color: rgba(30, 144, 255, 0.2) !important;
+  border-left-color: var(--zoo-gold);
+  color: var(--zoo-gold) !important;
+}
+
+.sidebar-menu > li.active > a,
+.main-sidebar .sidebar-menu > li.active > a {
+  background-color: rgba(30, 144, 255, 0.3) !important;
+  border-left-color: var(--zoo-gold);
+  color: var(--zoo-gold) !important;
+}
+
+/* Sidebar icons */
+.sidebar-menu > li > a > .fa,
+.sidebar-menu > li > a > .fas,
+.sidebar-menu > li > a > .fab,
+.sidebar-menu > li > a > .glyphicon {
+  color: var(--zoo-gold);
+}
+
+/* Sidebar header */
+.sidebar-menu > li.header {
+  color: var(--zoo-gold) !important;
+  font-weight: bold;
+  background-color: rgba(30, 144, 255, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Treeview (collapsible menu items) */
+.sidebar-menu .treeview-menu > li > a {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar-menu .treeview-menu > li > a:hover {
+  color: var(--zoo-gold) !important;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--zoo-blue) 0%, var(--zoo-navy) 100%) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: linear-gradient(135deg, var(--zoo-navy) 0%, var(--zoo-blue) 100%) !important;
+  border-color: var(--zoo-navy) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 144, 255, 0.4);
+}
+
+.btn-success {
+  background-color: var(--zoo-success) !important;
+  border-color: var(--zoo-success) !important;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #45a049 !important;
+  border-color: #45a049 !important;
+}
+
+.btn-warning {
+  background-color: var(--zoo-warning) !important;
+  border-color: var(--zoo-warning) !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: #e68900 !important;
+  border-color: #e68900 !important;
+}
+
+.btn-danger {
+  background-color: var(--zoo-danger) !important;
+  border-color: var(--zoo-danger) !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #da190b !important;
+  border-color: #da190b !important;
+}
+
+/* ========================================
+   PANELS & CARDS
+   ======================================== */
+
+.panel-primary,
+.card-primary {
+  border-color: var(--zoo-blue) !important;
+}
+
+.panel-primary > .panel-heading,
+.card-primary .card-header {
+  background: linear-gradient(135deg, var(--zoo-blue) 0%, var(--zoo-navy) 100%) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+}
+
+.panel-heading {
+  font-weight: 600;
+}
+
+.panel-default > .panel-heading {
+  background-color: var(--zoo-gray-light);
+  border-color: var(--zoo-gray-medium);
+}
+
+.box {
+  border-top: 3px solid var(--zoo-blue);
+}
+
+.box-primary {
+  border-top-color: var(--zoo-blue);
+}
+
+.box-header {
+  background-color: var(--zoo-gray-light);
+}
+
+.box-primary > .box-header {
+  background: linear-gradient(135deg, var(--zoo-blue) 0%, var(--zoo-navy) 100%);
+  color: var(--zoo-white);
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+.table > thead > tr > th {
+  background-color: var(--zoo-navy) !important;
+  color: var(--zoo-white) !important;
+  border-bottom: 2px solid var(--zoo-gold);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(30, 144, 255, 0.05);
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: rgba(30, 144, 255, 0.1) !important;
+}
+
+/* DataTables styling */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: linear-gradient(135deg, var(--zoo-blue) 0%, var(--zoo-navy) 100%) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: var(--zoo-blue) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-control:focus {
+  border-color: var(--zoo-blue) !important;
+  box-shadow: 0 0 0 0.2rem rgba(30, 144, 255, 0.25) !important;
+}
+
+.input-group-addon {
+  background-color: var(--zoo-navy) !important;
+  color: var(--zoo-white) !important;
+  border-color: var(--zoo-blue) !important;
+}
+
+/* Select2 dropdowns */
+.select2-container--default .select2-selection--single:focus,
+.select2-container--default .select2-selection--multiple:focus {
+  border-color: var(--zoo-blue);
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: var(--zoo-blue);
+}
+
+/* ========================================
+   ALERTS & NOTIFICATIONS
+   ======================================== */
+
+.alert-info {
+  background-color: rgba(30, 144, 255, 0.1) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-navy) !important;
+}
+
+.alert-success {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  border-color: var(--zoo-success) !important;
+}
+
+.alert-warning {
+  background-color: rgba(255, 152, 0, 0.1) !important;
+  border-color: var(--zoo-warning) !important;
+}
+
+.alert-danger {
+  background-color: rgba(244, 67, 54, 0.1) !important;
+  border-color: var(--zoo-danger) !important;
+}
+
+/* ========================================
+   LOGIN PAGE
+   ======================================== */
+
+.login-page {
+  background-image: url('/static/zoo-custom/images/login-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.login-box,
+.login-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.login-box-body,
+.login-card-body {
+  border-radius: 8px;
+}
+
+.login-logo a {
+  color: var(--zoo-blue) !important;
+  font-weight: bold;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.main-footer,
+footer {
+  background: linear-gradient(135deg, var(--zoo-space-dark) 0%, var(--zoo-navy) 100%) !important;
+  color: var(--zoo-white) !important;
+}
+
+.main-footer a,
+footer a {
+  color: var(--zoo-gold) !important;
+}
+
+.main-footer a:hover,
+footer a:hover {
+  color: var(--zoo-blue) !important;
+  text-decoration: none;
+}
+
+/* ========================================
+   BADGES & LABELS
+   ======================================== */
+
+.badge-primary,
+.label-primary {
+  background-color: var(--zoo-blue) !important;
+}
+
+.badge-success,
+.label-success {
+  background-color: var(--zoo-success) !important;
+}
+
+.badge-warning,
+.label-warning {
+  background-color: var(--zoo-warning) !important;
+}
+
+.badge-danger,
+.label-danger {
+  background-color: var(--zoo-danger) !important;
+}
+
+.badge-info,
+.label-info {
+  background-color: var(--zoo-info) !important;
+}
+
+/* ========================================
+   PROGRESS BARS
+   ======================================== */
+
+.progress-bar-primary {
+  background-color: var(--zoo-blue) !important;
+}
+
+.progress-bar-success {
+  background-color: var(--zoo-success) !important;
+}
+
+/* ========================================
+   TABS
+   ======================================== */
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  background-color: var(--zoo-blue) !important;
+  border-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+}
+
+.nav-tabs > li > a:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+  border-color: var(--zoo-gray-medium);
+}
+
+/* ========================================
+   MODALS
+   ======================================== */
+
+.modal-header {
+  background: linear-gradient(135deg, var(--zoo-blue) 0%, var(--zoo-navy) 100%);
+  color: var(--zoo-white);
+}
+
+.modal-header .close {
+  color: var(--zoo-white);
+  opacity: 0.8;
+}
+
+.modal-header .close:hover {
+  opacity: 1;
+}
+
+/* ========================================
+   CUSTOM ELEMENTS
+   ======================================== */
+
+/* Add subtle space theme to content areas */
+.content-wrapper,
+.main-content {
+  background: linear-gradient(180deg, var(--zoo-gray-light) 0%, var(--zoo-white) 100%);
+}
+
+/* Content header */
+.content-header h1 {
+  color: var(--zoo-navy);
+}
+
+/* Info boxes (dashboard widgets) */
+.info-box {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-box-icon {
+  background-color: var(--zoo-blue) !important;
+}
+
+.small-box {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.small-box > .inner {
+  padding: 15px;
+}
+
+.small-box h3,
+.small-box p {
+  color: var(--zoo-white);
+}
+
+/* Links */
+a {
+  color: var(--zoo-blue);
+}
+
+a:hover,
+a:focus {
+  color: var(--zoo-navy);
+  text-decoration: none;
+}
+
+/* Custom scrollbar (Webkit browsers) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--zoo-space-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--zoo-blue);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--zoo-gold);
+}
+
+/* ========================================
+   HERO BANNER COMPONENT
+   ======================================== */
+
+.zoo-hero-banner {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.zoo-hero-content {
+  background: rgba(10, 10, 26, 0.85);
+  padding: 20px 40px;
+  border-radius: 8px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.zoo-hero-content h1 {
+  color: var(--zoo-blue);
+  margin: 0;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px #000;
+  font-weight: bold;
+}
+
+.zoo-hero-content p {
+  color: var(--zoo-gold);
+  margin: 10px 0 0 0;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    max-height: 30px;
+  }
+
+  .sidebar {
+    font-size: 14px;
+  }
+
+  .zoo-hero-banner {
+    height: 150px;
+  }
+
+  .zoo-hero-content h1 {
+    font-size: 1.8em;
+  }
+
+  .zoo-hero-content p {
+    font-size: 1em;
+  }
+
+  .zoo-hero-content {
+    padding: 15px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zoo-hero-banner {
+    height: 120px;
+  }
+
+  .zoo-hero-content h1 {
+    font-size: 1.4em;
+  }
+
+  .zoo-hero-content p {
+    font-size: 0.9em;
+  }
+
+  .zoo-hero-content {
+    padding: 10px 20px;
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+  .sidebar,
+  .navbar,
+  .main-sidebar,
+  .zoo-hero-banner {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .content-wrapper {
+    margin-left: 0 !important;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-zoo-blue {
+  color: var(--zoo-blue) !important;
+}
+
+.text-zoo-gold {
+  color: var(--zoo-gold) !important;
+}
+
+.bg-zoo-blue {
+  background-color: var(--zoo-blue) !important;
+  color: var(--zoo-white) !important;
+}
+
+.bg-zoo-navy {
+  background-color: var(--zoo-navy) !important;
+  color: var(--zoo-white) !important;
+}
+
+.bg-zoo-gold {
+  background-color: var(--zoo-gold) !important;
+  color: var(--zoo-navy) !important;
+}
+
+.border-zoo-blue {
+  border-color: var(--zoo-blue) !important;
+}
+
+.border-zoo-gold {
+  border-color: var(--zoo-gold) !important;
+}

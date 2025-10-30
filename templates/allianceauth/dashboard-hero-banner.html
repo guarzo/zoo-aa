@@ -1,0 +1,36 @@
+<!--
+  ADD THIS TO YOUR dashboard.html TEMPLATE
+  Insert right after {% block content %} or at the top of the main content area
+-->
+
+{% load static %}
+
+<!-- Zoo Landers Hero Banner -->
+<div class="zoo-hero-banner" style="background-image: url('{% static "zoo-custom/images/hero-banner.jpg" %}');">
+    <div class="zoo-hero-content">
+        <h1>Welcome to Zoo Landers</h1>
+        <p>Center for Kids Who Can't Fly Good</p>
+    </div>
+</div>
+
+<!-- Alternative: Smaller welcome message -->
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: linear-gradient(135deg, #1e90ff 0%, #1a237e 100%); border: none;">
+                <h3 class="panel-title" style="font-size: 1.5em;">
+                    <i class="fas fa-rocket"></i> Welcome to Zoo Landers Auth
+                </h3>
+            </div>
+            <div class="panel-body" style="background: url('{% static "zoo-custom/images/hero-banner.jpg" %}'); background-size: cover; background-position: center; min-height: 120px;">
+                <div style="background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 5px; display: inline-block;">
+                    <p style="margin: 0; font-size: 1.2em; color: #1a237e; font-weight: bold;">
+                        Center for Kids Who Can't Fly Good
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->

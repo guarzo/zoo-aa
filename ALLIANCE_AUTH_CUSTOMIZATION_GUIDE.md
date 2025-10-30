@@ -252,23 +252,6 @@ Tasks confirmed running:
 - `standings_requests_standings_update` - Every 30 minutes
 - And 12 more periodic tasks
 
-### Configuration Note
-
-**Warning in logs**: `STANDINGSSYNC_REPLACE_CONTACTS` setting is invalid.
-
-To fix, edit `conf/local.py` line 141:
-```python
-# Change from:
-STANDINGSSYNC_REPLACE_CONTACTS = "merge"
-
-# To one of the valid options:
-STANDINGSSYNC_REPLACE_CONTACTS = True   # Replace all contacts
-# OR
-STANDINGSSYNC_REPLACE_CONTACTS = False  # Don't replace contacts
-```
-
----
-
 ## Quick Reference Commands
 
 ```bash
