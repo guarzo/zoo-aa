@@ -1,3 +1,7 @@
-<svg class="svg-alliance-auth-logo" width="{{ logo_width|default:"128px" }}" height="{% if logo_height %}{{ logo_height }}{% else %}{{ logo_width|default:"128px" }}{% endif %}">
-    <use href="#aa-logo"></use>
-</svg>
+{% load static %}
+<img src="{% static 'allianceauth/icons/allianceauth.png' %}"
+     alt="Zoo Landers"
+     width="{{ logo_width|default:'128' }}"
+     height="{% if logo_height %}{{ logo_height }}{% else %}{{ logo_width|default:'128' }}{% endif %}"
+     style="max-width: 100%; height: auto;"
+     class="zoo-sidebar-logo">
