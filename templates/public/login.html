@@ -1,0 +1,24 @@
+{% extends 'public/middle_box.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}{% translate "Login" %}{% endblock %}
+
+{% block middle_box_content %}
+    <!-- Zoo Landers Logo -->
+    <div style="text-align: center; margin-bottom: 30px;">
+        <img src="{% static 'allianceauth/icons/allianceauth.png' %}" alt="Zoo Landers" style="max-width: 250px; height: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));">
+    </div>
+
+    <!-- Welcome Text -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: #1e90ff; text-shadow: 2px 2px 4px #000; margin-bottom: 10px;">Welcome to Zoo Landers</h2>
+        <p style="color: #FFD700; text-shadow: 1px 1px 2px #000; font-size: 1.1em;">Center for Kids Who Can't Fly Good</p>
+    </div>
+
+    <!-- SSO Login Button -->
+    <a href="{% url 'auth_sso_login' %}{% if request.GET.next %}?next={{request.GET.next | urlencode}}{%endif%}">
+        <img class="img-responsive center-block" src="{% static 'allianceauth/authentication/img/sso/EVE_SSO_Login_Buttons_Large_Black.png' %}" alt="{% translate 'Login with Eve SSO' %}">
+    </a>
+{% endblock %}
