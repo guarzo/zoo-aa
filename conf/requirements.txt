@@ -1,5 +1,5 @@
 aa-wanderer-map==0.1.5
-aa-payout==0.2.23
+aa-payout==0.2.24
 aa-standingssync-zoo==1.10.6
 aa-standingsrequests==1.4.1
 allianceauth-corptools==2.13.0

@@ -1,54 +1,79 @@
-# Zoo Landers Customization - Deployment Guide
+# Zoo Landers - Deployment Guide
 
-**Quick deployment via Git** ⚡
+Quick deployment guide with tested commands.
 
 ---
 
-## Pre-Deployment
+## Prerequisites
+
+- SSH access to your Alliance Auth server
+- Alliance Auth running in Docker
+- Git installed
+
+---
+
+## Step 1: Backup
 
 ```bash
-# 1. Backup (just in case)
 cd /app/aa-docker/
 docker-compose down
 tar -czf ~/aa-backup-$(date +%Y%m%d).tar.gz .
 docker-compose up -d
-
-# 2. Update from Git
-git pull origin main  # or your branch name
 ```
 
 ---
 
-## Deployment Steps
-
-### 1. Update Site Name
+## Step 2: Pull Updates
 
 ```bash
-# Edit .env
-nano .env
-
-# Change to:
-AA_SITENAME=Zoo Landers
-
-# Save and exit
+cd /app/aa-docker/
+git pull origin main
 ```
 
-### 2. Extract and Modify Templates
+---
+
+## Step 3: Update Site Name
 
 ```bash
-# Start services if not running
-docker-compose up -d allianceauth_gunicorn
+nano .env
+```
 
-# Extract base.html and add CSS/JS includes
-docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/templates/allianceauth/base.html > ./templates/allianceauth/base.html
+Change:
+```bash
+AA_SITENAME=Zoo Landers
+```
 
-# Add CSS/JS before </head> tag
-sed -i 's|</head>|    <!-- Zoo Landers Custom Styles -->\n    {% load static %}\n    <link rel="stylesheet" href="{% static '\''allianceauth/css/zoo-custom.css'\'' %}">\n    <script src="{% static '\''zoo-custom/js/zoo-enhancements.js'\'' %}" defer></script>\n</head>|' ./templates/allianceauth/base.html
+Save and exit (Ctrl+X, Y, Enter).
 
-# Extract side-menu.html
+---
+
+## Step 4: Extract and Modify Templates
+
+### 4a. Base Template (for CSS/JS)
+
+```bash
+# Extract base-bs5.html
+docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/templates/allianceauth/base-bs5.html > ./templates/allianceauth/base-bs5.html
+
+# Edit to add CSS/JS before </head>
+nano ./templates/allianceauth/base-bs5.html
+```
+
+Add **before `</head>`**:
+```html
+    <!-- Zoo Landers Custom Styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'allianceauth/css/zoo-custom.css' %}">
+    <script src="{% static 'zoo-custom/js/zoo-enhancements.js' %}" defer></script>
+```
+
+### 4b. Sidebar Menu
+
+```bash
+# Extract sidebar
 docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/templates/allianceauth/side-menu.html > ./templates/allianceauth/side-menu.html
 
-# Add custom sidebar section (replace YOUR_INVITE_CODE and YOUR_CORP_ID first!)
+# Add custom links at the end
 cat >> ./templates/allianceauth/side-menu.html << 'EOF'
 
 <!-- Zoo Landers Custom Links -->
@@ -68,19 +93,24 @@ cat >> ./templates/allianceauth/side-menu.html << 'EOF'
     </a>
 </li>
 EOF
+```
 
-# Extract dashboard.html (for hero banner)
-# Note: The dashboard is in the authentication app, not allianceauth
+**Replace** `YOUR_INVITE_CODE` and `YOUR_CORP_ID` with your actual values!
+
+### 4c. Dashboard (Hero Banner)
+
+```bash
+# Create directory
 mkdir -p ./templates/authentication/
+
+# Extract dashboard
 docker exec allianceauth_gunicorn cat /usr/local/lib/python3.11/site-packages/allianceauth/authentication/templates/authentication/dashboard.html > ./templates/authentication/dashboard.html
 
-# Edit dashboard.html to add hero banner
-# Add this after {% block content %} and before <div class="row">:
+# Edit to add hero banner
 nano ./templates/authentication/dashboard.html
 ```
 
-**Add this to dashboard.html after `{% block content %}`:**
-
+Add **after `{% block content %}`** and **before `<div class="row">`**:
 ```html
     <!-- Zoo Landers Hero Banner -->
     <div class="zoo-hero-banner" style="background-image: url('/static/zoo-custom/images/hero-banner.jpg');">
@@ -91,23 +121,31 @@ nano ./templates/authentication/dashboard.html
     </div>
 ```
 
-### 3. Verify docker-compose.yml
+---
 
-Make sure this line exists in the volumes section (around line 17):
+## Step 5: Verify docker-compose.yml
+
+Ensure this line exists in volumes (around line 17):
 
 ```yaml
 - ./static:/home/allianceauth/myauth/myauth/static/
 ```
 
-If not, add it and restart.
+If missing, add it and restart.
 
-### 4. Collect Static Files
+---
+
+## Step 6: Collect Static Files
 
 ```bash
 docker exec allianceauth_gunicorn python manage.py collectstatic --noinput
 ```
 
-### 5. Restart Services
+You'll see warnings about duplicate icon files - **this is expected and correct**! Your custom icons override the defaults.
+
+---
+
+## Step 7: Restart Services
 
 ```bash
 docker-compose restart allianceauth_gunicorn allianceauth_worker allianceauth_beat nginx
@@ -117,82 +155,93 @@ Wait 30 seconds for services to fully restart.
 
 ---
 
-## Testing
+## Step 8: Test
 
-1. Clear browser cache (Ctrl+Shift+Delete)
-2. Open your Alliance Auth site in incognito mode
-3. Verify:
-   - [ ] Zoo Landers logo in navbar
-   - [ ] Blue gradient navbar
-   - [ ] Dark space sidebar
-   - [ ] Custom links in sidebar
-   - [ ] Favicon in browser tab
-   - [ ] Hero banner on dashboard
+1. **Clear browser cache** (Ctrl+Shift+Delete)
+2. **Open incognito window**
+3. **Visit your Alliance Auth URL**
+
+### Checklist
+
+- [ ] Browser tab shows "Zoo Landers"
+- [ ] Zoo Landers logo in navbar (top-left)
+- [ ] Blue gradient navbar
+- [ ] Dark space-themed sidebar
+- [ ] Custom "ZOO LANDERS" links in sidebar
+- [ ] Hero banner on dashboard
+- [ ] Favicon shows Zoo Landers badge
+- [ ] Login page has custom background and logo
+
+### Browser Console
+
+Press **F12** → **Console** tab. You should see:
+- `🦒 Zoo Landers Auth 🦁`
+- `✓ Zoo Landers enhancements loaded`
+
+No errors should appear.
 
 ---
 
-## Troubleshooting
+## Common Issues
 
-**CSS not applying?**
+### CSS Not Applying
+
 ```bash
-docker exec allianceauth_gunicorn python manage.py collectstatic --noinput
+# Re-collect static
+docker exec allianceauth_gunicorn python manage.py collectstatic --noinput --clear
 docker-compose restart nginx
-# Clear browser cache
+# Clear browser cache completely
 ```
 
-**Logo not showing?**
+### Logo Not Showing
+
 ```bash
-# Check if collected
+# Verify icons were collected
 docker exec allianceauth_gunicorn ls /var/www/myauth/static/allianceauth/icons/
-# If empty, run collectstatic again
+# Should show all 8 icon files
 ```
 
-**Custom links not showing?**
+### Custom Links Missing
+
 ```bash
-# Verify template has your changes
+# Verify template was modified
 cat templates/allianceauth/side-menu.html | grep "ZOO LANDERS"
 # Restart gunicorn
 docker-compose restart allianceauth_gunicorn
 ```
 
-**Hero banner not showing or error?**
+### Hero Banner Missing
+
 ```bash
-# Verify images were collected
+# Verify images exist
 docker exec allianceauth_gunicorn ls /var/www/myauth/static/zoo-custom/images/
-# Make sure you're using direct path: url('/static/zoo-custom/images/hero-banner.jpg')
-# NOT: url('{% static "..." %}')
+# Should show hero-banner.jpg and login-background.jpg
 ```
+
+For more help, see **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**
 
 ---
 
 ## Rollback
 
 ```bash
-git reset --hard HEAD~1  # Undo last commit
+cd /app/aa-docker/
+git reset --hard HEAD~1
 docker exec allianceauth_gunicorn python manage.py collectstatic --noinput
 docker-compose restart
 ```
 
 ---
 
-## Quick Reference
+## Next Steps
 
-```bash
-# Update from Git
-git pull
-
-# Collect static files
-docker exec allianceauth_gunicorn python manage.py collectstatic --noinput
-
-# Restart services
-docker-compose restart
-
-# Check logs
-docker logs allianceauth_gunicorn --tail 50
-```
+- Customize sidebar links (see [CUSTOMIZATION.md](CUSTOMIZATION.md))
+- Adjust colors if desired
+- Add additional custom templates
 
 ---
 
 **Estimated Time**: 15-30 minutes
+**Difficulty**: Easy
 
-For detailed troubleshooting, see `DEPLOYMENT_INSTRUCTIONS.md`
+🦒 **Welcome to Zoo Landers!** 🦁
