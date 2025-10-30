@@ -23,9 +23,12 @@
         {% block extra_include %}
         {% endblock %}
 
+        <!-- Zoo Landers Custom Styles -->
+        <link rel="stylesheet" href="{% static 'allianceauth/css/zoo-custom.css' %}">
+
         <style>
             body {
-                background: url('{% static 'allianceauth/authentication/img/background.jpg' %}') no-repeat center center fixed;
+                background: url('/static/zoo-custom/images/login-background.jpg') no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -33,9 +36,16 @@
             }
 
             .card-login {
-                background: rgba(48 48 48 / 0.7);
+                background: rgba(10, 10, 26, 0.85);
                 color: rgb(255 255 255);
                 padding-bottom: 21px;
+                border: 2px solid var(--zoo-blue);
+                box-shadow: 0 8px 32px rgba(30, 144, 255, 0.3);
+            }
+
+            .card-login h2 {
+                color: var(--zoo-blue);
+                text-shadow: 2px 2px 4px #000;
             }
 
             #lang-select {

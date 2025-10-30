@@ -531,7 +531,7 @@ a:focus {
 .zoo-hero-banner {
   background-size: cover;
   background-position: center;
-  height: 200px;
+  height: 300px;
   border-radius: 8px;
   margin-bottom: 20px;
   display: flex;
@@ -578,7 +578,7 @@ a:focus {
   }
 
   .zoo-hero-banner {
-    height: 150px;
+    height: 200px;
   }
 
   .zoo-hero-content h1 {
@@ -596,7 +596,7 @@ a:focus {
 
 @media (max-width: 480px) {
   .zoo-hero-banner {
-    height: 120px;
+    height: 150px;
   }
 
   .zoo-hero-content h1 {
