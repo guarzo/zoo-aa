@@ -86,17 +86,18 @@ INSTALLED_APPS += [
     # 'allianceauth.services.modules.teamspeak3',
     # 'allianceauth.services.modules.xenforo',
 
-    'afat',
-    'aadiscordbot',
+    #'afat',
+    #'aadiscordbot',
     'aapayout',
+    'alumni',
     'package_monitor',
     'timezones',
-    'fleetfinder',
+    #'fleetfinder',
     'corptools',
     'eveuniverse',
-    'fittings',
-    'securegroups',
-    'memberaudit',
+    #'fittings',
+    #'securegroups',
+    #'memberaudit',
     'wanderer',
     'standingssync',
     'standingsrequests',
@@ -106,11 +107,29 @@ INSTALLED_APPS += [
 # Add any custom settings below here. #
 #######################################
 
+## Settings for AA-Alumni
+# Tasks
+CELERYBEAT_SCHEDULE['alumni_run_alumni_check_all'] = {
+    'task': 'alumni.tasks.run_alumni_check_all',
+    'schedule': crontab(minute="0", hour="0", day_of_week="4"),
+    'apply_offset': True,
+}
+CELERYBEAT_SCHEDULE['alumni_run_update_all_models'] = {
+    'task': 'alumni.tasks.update_all_models',
+    'schedule': crontab(minute="0", hour="0", day_of_week="3"),
+    'apply_offset': True,
+}
+
+
+
 ####
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_LOGIN_METHODS = {"username"}  # Use username for login instead of email
+ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]  # Remove email from signup
+ACCOUNT_UNIQUE_EMAIL = False  # Don't enforce unique emails
 ####
 
 
