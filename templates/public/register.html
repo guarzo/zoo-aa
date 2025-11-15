@@ -16,9 +16,27 @@
         <div class="col-md-6">
             <div class="card card-login border-secondary p-3">
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="POST" id="registration-form">
                         {% csrf_token %}
                         {% bootstrap_form form %}
+
+                        {# Hide the email field and auto-fill it with a unique dummy email #}
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var emailField = document.getElementById('id_email');
+                                if (emailField) {
+                                    // Hide the email field and its label
+                                    var formGroup = emailField.closest('.mb-3');
+                                    if (formGroup) {
+                                        formGroup.style.display = 'none';
+                                    }
+                                    // Generate unique email based on random string
+                                    var randomStr = Math.random().toString(36).substring(2, 15);
+                                    emailField.value = randomStr + '@zoolanders.space';
+                                    emailField.removeAttribute('required');
+                                }
+                            });
+                        </script>
 
                         <button class="btn btn-primary btn-block" type="submit">{% translate "Register" %}</button>
                     </form>

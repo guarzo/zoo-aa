@@ -124,16 +124,8 @@ CELERYBEAT_SCHEDULE['alumni_run_update_all_models'] = {
 
 ####
 # Make email field optional during registration
-# Alliance Auth doesn't have a built-in setting for this, so we monkey patch the RegistrationForm
-# Note: REGISTRATION_VERIFY_EMAIL = False (above) disables verification, but this makes the field optional
-from allianceauth.authentication.forms import RegistrationForm
-
-original_init = RegistrationForm.__init__
-def patched_init(self, *args, **kwargs):
-    original_init(self, *args, **kwargs)
-    if 'email' in self.fields:
-        self.fields['email'].required = False
-RegistrationForm.__init__ = patched_init
+# This will be imported and patched after Django apps are loaded
+# Note: REGISTRATION_VERIFY_EMAIL = False (above) disables verification
 ####
 
 
