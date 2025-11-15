@@ -1,9 +1,9 @@
-aa-wanderer-map==0.1.6
+aa-wanderer-map==0.1.7
 aa-payout==0.2.27
 aa-alumni==0.4.0
 aa-standingssync-zoo==1.10.7
 aa-standingsrequests==1.4.1
-allianceauth-corptools==2.14.0
+allianceauth-corptools==2.15.0
 aa-memberaudit==4.1.0
 aa-package-monitor==2.2.2
 aa-timezones==2.4.3

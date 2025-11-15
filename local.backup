@@ -121,11 +121,14 @@ CELERYBEAT_SCHEDULE['alumni_run_update_all_models'] = {
 }
 
 
-
 ####
-# Make email field optional during registration
-# This will be imported and patched after Django apps are loaded
-# Note: REGISTRATION_VERIFY_EMAIL = False (above) disables verification
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_LOGIN_METHODS = {"username"}  # Use username for login instead of email
+ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]  # Remove email from signup
+ACCOUNT_UNIQUE_EMAIL = False  # Don't enforce unique emails
 ####
 
 
