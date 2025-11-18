@@ -99,8 +99,7 @@ INSTALLED_APPS += [
     #'securegroups',
     #'memberaudit',
     'wanderer',
-    'standingssync',
-    'standingsrequests',
+    'standingsmanager',
 ]
 
 #######################################
@@ -131,6 +130,8 @@ ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]  # Remove emai
 ACCOUNT_UNIQUE_EMAIL = False  # Don't enforce unique emails
 ####
 
+# Scope
+CT_EXTRA_CHARACTER_SCOPES = [ 'esi-custom-scope.v1', 'esi-fleets.read_fleet.v1']
 
 # aa payout config
 AAPAYOUT_JANICE_API_KEY = "REDACTED"  # Secret removed
@@ -150,13 +151,17 @@ TEMPLATES[0]['OPTIONS']['context_processors'].append(
 
 LOGGING['loggers']['aapayout'] = {'handlers': ['log_file'], 'level': 'DEBUG'}
 
-# settings for standingssync
-CELERYBEAT_SCHEDULE['standingssync.run_regular_sync'] = {
-    'task': 'standingssync.tasks.run_regular_sync',
-    'schedule': crontab(minute=0, hour='*/2')
+CELERYBEAT_SCHEDULE['standingsmanager_sync_all'] = {
+    'task': 'standingsmanager.tasks.run_regular_sync',
+    'schedule': crontab(minute='*/30'),  # Every 30 minutes
 }
 
-STANDINGSSYNC_REPLACE_CONTACTS = "merge"
+CELERYBEAT_SCHEDULE['standingsmanager_validate_all'] = {
+    'task': 'standingsmanager.tasks.run_regular_validation',
+    'schedule': crontab(hour='*/6'),  # Every 6 hours
+}
+
+STANDINGS_LABEL_NAME = "FLYGD"
 
 #wanderer
 CELERYBEAT_SCHEDULE['wanderer_cleanup_access_lists'] = {
